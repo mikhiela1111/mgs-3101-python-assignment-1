@@ -1,0 +1,92 @@
+MGS 3101 - Assignment 1: Coffee Shop Sales Analysis
+Author: Ab
+
+1. UNDERSTANDING THE DATA
+
+The dataset records every sale at a coffee chain with three New York City
+locations (Astoria, Hell's Kitchen and Lower Manhattan) from January 1 to
+June 30, 2023. It has 149,116 rows. Each row is one product line on a
+receipt: the date and time, the store, the product (category, type and
+detail), the unit price and the quantity. Revenue is not a column, so I
+calculated it as quantity x unit price.
+
+Over the six months the chain sold 214,470 items for $698,812 in revenue.
+The three stores are almost identical in size: Hell's Kitchen ($236.5K),
+Astoria ($232.2K) and Lower Manhattan ($230.1K) are within 3% of each other,
+so no single store is carrying or dragging down the business.
+
+Drinks are the business. Coffee (38.6%), tea (28.1%) and drinking chocolate
+(10.4%) make up 77% of revenue. Bakery items are the next largest group at
+11.8%, and retail goods (coffee beans, loose tea, branded merchandise,
+packaged chocolate) add about 10%. Items are cheap: the average drink sells
+for about $3.05 and the average pastry for $3.55, so revenue depends on
+volume rather than big tickets.
+
+Three patterns stand out:
+- Timing: the 7-10 AM window brings in 45.8% of all revenue in just four
+  hours. From noon to 5 PM, each hour earns about half of a morning hour
+  ($40.8K vs. $80.0K over the six months).
+- Growth: monthly revenue more than doubled, from $81.7K in January to
+  $166.5K in June (+104%). Only February dipped (-6.8%), which is likely
+  because it is a shorter, colder month.
+- Concentration: the top 10 product types (led by barista espresso, brewed
+  chai, hot chocolate and gourmet brewed coffee) produce 79% of revenue.
+
+For the Python variables I used one real day from the data: Hell's Kitchen
+on June 30, 2023, which sold 352 drinks at about $3.10 and 65 pastries at
+about $3.61, for $1,325.85. That is well above the $500 benchmark in the
+assignment. The average store-day across the whole dataset is about $1,290.
+
+2. RECOMMENDATIONS
+
+Recommendation 1 - Offer a drink + pastry bundle.
+The chain sells only 13.2 pastries for every 100 drinks (12.5 at Astoria,
+13.0 at Hell's Kitchen, 14.0 at Lower Manhattan). Pastries already sell at a
+higher average price than drinks, and nearly every customer is already
+buying a drink. A small-discount morning bundle (for example, $1 off a
+pastry with any drink) and a "would you like a scone with that?" prompt at
+the register are low-cost ways to raise that number. If the attach rate rose
+to 20 per 100 drinks, the chain would sell about 12,000 more pastries, worth
+roughly $42,800 over six months before the discount.
+Data produced: output/rec1_pastry_attach_rate.csv
+
+Recommendation 2 - Use an afternoon promotion to fill the lull.
+Revenue drops sharply after 11 AM and stays flat until closing. The stores
+are open and staffed in the afternoon but earn about half as much per hour
+as in the morning. A 12-5 PM offer, such as a happy-hour price on iced
+drinks and tea or a loyalty double-points window, would target spare
+capacity rather than competing with the busy morning rush. Morning staffing
+should stay focused on speed, since that window drives almost half of sales.
+Data produced: output/rec2_revenue_by_hour.csv
+
+Recommendation 3 - Plan staffing and inventory for continued growth,
+built around the top sellers.
+Revenue doubled in six months at all three stores at the same time, which
+suggests demand for the brand is growing rather than one store getting
+lucky. Managers should forecast from the recent monthly trend, not from
+January, when scheduling staff and ordering supplies. Because 10 product
+types make up 79% of revenue, the priority is never running out of espresso
+beans, chai, chocolate and the brewed coffees, while slow sellers (for
+example green beans, green tea and organic chocolate, each under $1,700 in
+six months) are candidates for trimming to simplify the menu and reduce
+waste.
+Data produced: output/rec3_monthly_revenue.csv, output/rec3_top_products.csv
+
+3. QUESTIONS
+
+1. Does each row represent a full customer order or one line of an order?
+   The transaction_id is unique per row, so I cannot tell which drinks and
+   pastries were bought together. A true basket ID would make the pastry
+   attach rate in Recommendation 1 much more accurate.
+2. What are the costs? The data only shows sales prices. Without ingredient,
+   labor and rent costs I can recommend how to grow revenue, but not which
+   products are most profitable.
+3. What caused the growth from March to June: new marketing, price changes,
+   seasonality or tourism? Knowing this would show whether the trend is
+   likely to continue into the second half of the year.
+4. Were there any promotions or discounts during this period? The prices
+   look like list prices, so it is unclear whether discounts are already
+   reflected in the data.
+5. Should the $500 revenue benchmark apply to a single store per day? Every
+   store averages well above it, so a higher target might be more useful
+   for tracking performance.
